@@ -16,6 +16,8 @@ import retrofit2.Response
 class SharedCatApiViewModel : ViewModel() {
     private val _breedsList = MutableLiveData<List<CatBreeds>>()
     val breedsList: LiveData<List<CatBreeds>> = _breedsList
+    private val _breeds = MutableLiveData<CatBreeds>()
+    val breeds: LiveData<CatBreeds> = _breeds
     private val corScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     fun getBreedsList(onFail: () -> Unit) {
@@ -36,6 +38,29 @@ class SharedCatApiViewModel : ViewModel() {
                     }
 
                 }
+                )
+        }
+    }
+
+    fun findBreedsByName(name: String, onFail: () -> Unit) {
+        corScope.launch {
+            NetworkService.getInstance()
+                .getJSONApi()
+                .getCatBreedsByName(name)
+                .enqueue(
+                    object : Callback<List<CatBreeds>> {
+                        override fun onResponse(
+                            call: Call<List<CatBreeds>>,
+                            response: Response<List<CatBreeds>>
+                        ) {
+                            _breeds.postValue(response.body()?.get(0))
+                        }
+
+                        override fun onFailure(call: Call<List<CatBreeds>>, t: Throwable) {
+                            onFail()
+                        }
+
+                    }
                 )
         }
     }

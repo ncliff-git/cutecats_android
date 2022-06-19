@@ -6,21 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.github.ncliff.cutecats.R
 import com.github.ncliff.cutecats.data.network.CatBreeds
 
-class CatBreedsRVAdapter: RecyclerView.Adapter<CatBreedsRVAdapter.CatBreedsHolder>() {
+class CatBreedsRVAdapter(private val onClick: (name: String) -> Unit): RecyclerView.Adapter<CatBreedsRVAdapter.CatBreedsHolder>() {
     private var _catBreedsList = ArrayList<CatBreeds>()
 
-    class CatBreedsHolder(view: View): RecyclerView.ViewHolder(view) {
+    class CatBreedsHolder(private val onClick: (name: String) -> Unit, view: View): RecyclerView.ViewHolder(view) {
         private val ivCatBreeds: ImageView = view.findViewById(R.id.item_cat_image)
         private val tvCatBreeds: TextView = view.findViewById(R.id.item_cat_text)
+        private val cardCatBreeds: CardView = view.findViewById(R.id.item_cat_card)
 
         fun bind(catBreeds: CatBreeds) {
             tvCatBreeds.text = catBreeds.name
             ivCatBreeds.load(catBreeds.image?.url)
+            cardCatBreeds.setOnClickListener {
+                catBreeds.name?.let { name -> onClick(name) }
+            }
         }
     }
 
@@ -34,7 +39,7 @@ class CatBreedsRVAdapter: RecyclerView.Adapter<CatBreedsRVAdapter.CatBreedsHolde
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatBreedsHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_cat, parent, false)
-        return CatBreedsHolder(view)
+        return CatBreedsHolder(onClick, view)
     }
 
     override fun onBindViewHolder(holder: CatBreedsHolder, position: Int) {
