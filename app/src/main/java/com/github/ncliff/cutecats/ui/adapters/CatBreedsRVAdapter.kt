@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.github.ncliff.cutecats.R
@@ -16,15 +18,20 @@ class CatBreedsRVAdapter(private val onClick: (name: String) -> Unit): RecyclerV
     private var _catBreedsList = ArrayList<CatBreeds>()
 
     class CatBreedsHolder(private val onClick: (name: String) -> Unit, view: View): RecyclerView.ViewHolder(view) {
+        private val pbCatBreeds: ProgressBar = view.findViewById(R.id.item_cat_progress_bar)
         private val ivCatBreeds: ImageView = view.findViewById(R.id.item_cat_image)
         private val tvCatBreeds: TextView = view.findViewById(R.id.item_cat_text)
         private val cardCatBreeds: CardView = view.findViewById(R.id.item_cat_card)
 
         fun bind(catBreeds: CatBreeds) {
             tvCatBreeds.text = catBreeds.name
-            ivCatBreeds.load(catBreeds.image?.url)
+            ivCatBreeds.load(catBreeds.image?.url) {
+                listener(onSuccess = { _, _ ->
+                    pbCatBreeds.isVisible = false
+                })
+            }
             cardCatBreeds.setOnClickListener {
-                catBreeds.name?.let { name -> onClick(name) }
+                catBreeds.name?.apply(onClick)
             }
         }
     }

@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.github.ncliff.cutecats.Model.SharedCatApiViewModel
+import com.github.ncliff.cutecats.ui.viewmodel.SharedCatApiViewModel
 import com.github.ncliff.cutecats.databinding.FragmentDetailedItemBinding
 
 class DetailedItemFragment : Fragment() {
@@ -38,6 +38,7 @@ class DetailedItemFragment : Fragment() {
             _binding?.apply {
                 progressBarCatBreeds.isVisible = false
                 separatorLine.isVisible = true
+
                 tvBreedsName.text = it.name
                 tvBreedsId.text = "id: ${it.id}"
                 tvBreedsDescription.text = it.description

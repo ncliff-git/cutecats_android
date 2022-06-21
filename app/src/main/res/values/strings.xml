@@ -6,4 +6,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="wikipedia">Wikipedia</string>
+    <string name="favourite_it">fav it</string>
+    <string name="love_it">love it</string>
+    <string name="nope_it">nope it</string>
+    <string name="vote">Vote</string>
 </resources>

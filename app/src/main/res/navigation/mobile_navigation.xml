@@ -18,5 +18,10 @@
         android:name="com.github.ncliff.cutecats.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/navigation_vote"
+        android:name="com.github.ncliff.cutecats.ui.vote.VoteFragment"
+        android:label="fragment_vote"
+        tools:layout="@layout/fragment_vote" />
 
 </navigation>

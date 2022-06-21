@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.github.ncliff.cutecats.Model.SharedCatApiViewModel
+import com.github.ncliff.cutecats.ui.viewmodel.SharedCatApiViewModel
 import com.github.ncliff.cutecats.R
 import com.github.ncliff.cutecats.databinding.FragmentHomeBinding
 import com.github.ncliff.cutecats.ui.adapters.CatBreedsRVAdapter
