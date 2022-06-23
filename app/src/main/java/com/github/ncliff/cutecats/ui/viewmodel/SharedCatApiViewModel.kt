@@ -5,15 +5,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.ncliff.cutecats.data.network.*
+import com.github.ncliff.cutecats.model.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.Field
 
 class SharedCatApiViewModel : ViewModel() {
     private val _breedsList = MutableLiveData<List<CatBreeds>>()
@@ -102,7 +103,7 @@ class SharedCatApiViewModel : ViewModel() {
         corScope.launch {
             NetworkService.getInstance()
                 .getJSONApi()
-                .postSaveImageAsFavourites(image_id = image_id)
+                .postSaveImageAsFavourites(image_id = image_id, null)
                 .enqueue(object :Callback<CatResponses> {
                     override fun onResponse(
                         call: Call<CatResponses>,
@@ -138,6 +139,40 @@ class SharedCatApiViewModel : ViewModel() {
                         onFail()
                     }
                 })
+        }
+    }
+
+    fun postCatUpload(file: RequestBody, onFail: () -> Unit) {
+        corScope.launch {
+            NetworkService.getInstance()
+                .getJSONApi()
+                .postCatUpload(file)
+                .enqueue(
+                    object : Callback<UploadResponse> {
+                        override fun onResponse(
+                            call: Call<UploadResponse>,
+                            response: Response<UploadResponse>
+                        ) {
+                            if (response.errorBody() != null) {
+                                Log.e(
+                                    "Network",
+                                    "Image upload error error body: ${response.errorBody()?.string()}"
+                                )
+                            } else {
+                                Log.d(
+                                    "Network",
+                                    "Image upload ${response.body()} "
+                                )
+                            }
+                        }
+
+                        override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
+                            Log.e("Network", "Image upload error: $t")
+                            onFail()
+                        }
+
+                    }
+                )
         }
     }
 }

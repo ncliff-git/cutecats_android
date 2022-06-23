@@ -10,4 +10,9 @@
     <string name="love_it">love it</string>
     <string name="nope_it">nope it</string>
     <string name="vote">Vote</string>
+    <string name="breeds">Breeds</string>
+    <string name="upload">Upload</string>
+    <string name="breed_info">Breed info</string>
+    <string name="delete">Delete</string>
+    <string name="upload_cat_image">Upload cat image</string>
 </resources>

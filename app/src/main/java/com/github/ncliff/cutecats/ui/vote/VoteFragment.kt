@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import coil.load
-import com.github.ncliff.cutecats.data.network.CatImage
-import com.github.ncliff.cutecats.data.network.CatVote
 import com.github.ncliff.cutecats.databinding.FragmentVoteBinding
+import com.github.ncliff.cutecats.model.CatImage
+import com.github.ncliff.cutecats.model.CatVote
 import com.github.ncliff.cutecats.ui.viewmodel.SharedCatApiViewModel
 
 class VoteFragment : Fragment() {
@@ -31,16 +34,18 @@ class VoteFragment : Fragment() {
     }
 
     private fun registrationForObservables() {
-        catViewModel.getRandomCatImage{}.observe(viewLifecycleOwner) {
-            catImage = it
-            _binding.voteCatImage.load(it.url)
+        if (catImage == null) {
+            catViewModel.getRandomCatImage {}.observe(viewLifecycleOwner) {
+                catImage = it
+                _binding.voteCatImage.load(it.url)
+            }
         }
 
         _binding.btnLoveIt.setOnClickListener {
             catImage.also { img ->
                 catViewModel.postCatVote(CatVote(imageId = img?.id, value = 1)) {}
             }
-            catViewModel.getRandomCatImage{}.observe(viewLifecycleOwner) {
+            catViewModel.getRandomCatImage {}.observe(viewLifecycleOwner) {
                 catImage = it
                 _binding.voteCatImage.load(it.url)
             }
@@ -49,7 +54,7 @@ class VoteFragment : Fragment() {
             catImage.also { img ->
                 catViewModel.postCatVote(CatVote(imageId = img?.id, value = 0)) {}
             }
-            catViewModel.getRandomCatImage{}.observe(viewLifecycleOwner) {
+            catViewModel.getRandomCatImage {}.observe(viewLifecycleOwner) {
                 catImage = it
                 _binding.voteCatImage.load(it.url)
             }

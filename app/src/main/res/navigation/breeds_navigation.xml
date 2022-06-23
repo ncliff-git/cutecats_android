@@ -2,23 +2,23 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/home_navigation"
-    app:startDestination="@id/homeFragment">
+    android:id="@+id/breeds_navigation"
+    app:startDestination="@id/breedsFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.github.ncliff.cutecats.ui.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        android:id="@+id/breedsFragment"
+        android:name="com.github.ncliff.cutecats.ui.breeds.BreedsFragment"
+        android:label="@string/breeds"
+        tools:layout="@layout/fragment_breeds" >
         <action
             android:id="@+id/action_homeFragment_to_detailedItemFragment"
             app:destination="@id/detailedItemFragment"
-            app:popUpTo="@id/homeFragment" />
+            app:popUpTo="@id/breedsFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/detailedItemFragment"
-        android:name="com.github.ncliff.cutecats.ui.home.DetailedItemFragment"
-        android:label="fragment_detailed_item"
+        android:name="com.github.ncliff.cutecats.ui.breeds.DetailedItemFragment"
+        android:label="@string/breed_info"
         tools:layout="@layout/fragment_detailed_item" />
 </navigation>

@@ -12,12 +12,14 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.github.ncliff.cutecats.R
-import com.github.ncliff.cutecats.data.network.CatBreeds
+import com.github.ncliff.cutecats.model.CatBreeds
 
-class CatBreedsRVAdapter(private val onClick: (name: String) -> Unit): RecyclerView.Adapter<CatBreedsRVAdapter.CatBreedsHolder>() {
+class CatBreedsRVAdapter(private val onClick: (name: String) -> Unit) :
+    RecyclerView.Adapter<CatBreedsRVAdapter.CatBreedsHolder>() {
     private var _catBreedsList = ArrayList<CatBreeds>()
 
-    class CatBreedsHolder(private val onClick: (name: String) -> Unit, view: View): RecyclerView.ViewHolder(view) {
+    class CatBreedsHolder(private val onClick: (name: String) -> Unit, view: View) :
+        RecyclerView.ViewHolder(view) {
         private val pbCatBreeds: ProgressBar = view.findViewById(R.id.item_cat_progress_bar)
         private val ivCatBreeds: ImageView = view.findViewById(R.id.item_cat_image)
         private val tvCatBreeds: TextView = view.findViewById(R.id.item_cat_text)
@@ -25,7 +27,8 @@ class CatBreedsRVAdapter(private val onClick: (name: String) -> Unit): RecyclerV
 
         fun bind(catBreeds: CatBreeds) {
             tvCatBreeds.text = catBreeds.name
-            ivCatBreeds.load(catBreeds.image?.url) {
+            ivCatBreeds.load(catBreeds.image?.url ?: R.drawable.ic_baseline_hide_image_24) {
+                crossfade(true)
                 listener(onSuccess = { _, _ ->
                     pbCatBreeds.isVisible = false
                 })

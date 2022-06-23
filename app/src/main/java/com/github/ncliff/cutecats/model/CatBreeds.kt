@@ -1,4 +1,4 @@
-package com.github.ncliff.cutecats.data.network
+package com.github.ncliff.cutecats.model
 
 import com.google.gson.annotations.SerializedName
 

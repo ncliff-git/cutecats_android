@@ -1,4 +1,4 @@
-package com.github.ncliff.cutecats.ui.home
+package com.github.ncliff.cutecats.ui.breeds
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,11 +10,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.github.ncliff.cutecats.ui.viewmodel.SharedCatApiViewModel
 import com.github.ncliff.cutecats.R
-import com.github.ncliff.cutecats.databinding.FragmentHomeBinding
+import com.github.ncliff.cutecats.databinding.FragmentBreedsBinding
 import com.github.ncliff.cutecats.ui.adapters.CatBreedsRVAdapter
 
-class HomeFragment : Fragment() {
-    private var _binding: FragmentHomeBinding? = null
+class BreedsFragment : Fragment() {
+    private var _binding: FragmentBreedsBinding? = null
     private val binding get() = _binding!!
     private var _rvCatBreedsAdapter: CatBreedsRVAdapter? = null
     private val catViewModel: SharedCatApiViewModel by lazy {
@@ -34,7 +34,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentBreedsBinding.inflate(inflater, container, false)
         initViewElements()
         registrationOnObservables()
         return binding.root
