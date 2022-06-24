@@ -1,4 +1,4 @@
-package com.github.ncliff.cutecats.ui.breeds
+package com.github.ncliff.cutecats.ui.view.breeds
 
 import android.content.Intent
 import android.net.Uri

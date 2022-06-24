@@ -8,21 +8,20 @@
     <include app:graph="@navigation/breeds_navigation"/>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.github.ncliff.cutecats.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
-    <fragment
         android:id="@+id/navigation_upload"
-        android:name="com.github.ncliff.cutecats.ui.upload.UploadFragment"
+        android:name="com.github.ncliff.cutecats.ui.view.upload.UploadFragment"
         android:label="@string/upload"
         tools:layout="@layout/fragment_upload" />
 
     <fragment
         android:id="@+id/navigation_vote"
-        android:name="com.github.ncliff.cutecats.ui.vote.VoteFragment"
+        android:name="com.github.ncliff.cutecats.ui.view.vote.VoteFragment"
         android:label="@string/vote"
         tools:layout="@layout/fragment_vote" />
+    <fragment
+        android:id="@+id/navigation_favourites"
+        android:name="com.github.ncliff.cutecats.ui.view.favourites.FavouritesFragment"
+        android:label="@string/favourites"
+        tools:layout="@layout/fragment_favourites" />
 
 </navigation>

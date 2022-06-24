@@ -12,9 +12,9 @@
         android:title="@string/vote"/>
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_favourites"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:title="@string/favourites" />
 
     <item
         android:id="@+id/navigation_upload"

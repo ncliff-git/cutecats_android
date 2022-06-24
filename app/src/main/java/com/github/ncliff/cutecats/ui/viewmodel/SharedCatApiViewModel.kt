@@ -5,12 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.ncliff.cutecats.data.network.*
-import com.github.ncliff.cutecats.model.*
+import com.github.ncliff.cutecats.data.model.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
-import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,6 +20,8 @@ class SharedCatApiViewModel : ViewModel() {
     val breedsList: LiveData<List<CatBreeds>> = _breedsList
     private val _breeds = MutableLiveData<CatBreeds>()
     val breeds: LiveData<CatBreeds> = _breeds
+    private val _favList = MutableLiveData<List<CatFav>>()
+    val favList: LiveData<List<CatFav>> = _favList
     private val corScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     fun getBreedsList(onFail: () -> Unit) {
@@ -99,17 +100,36 @@ class SharedCatApiViewModel : ViewModel() {
         return catImageLiveData
     }
 
-    fun postSaveImageAsFavourites(image_id: String, onFail: () -> Unit) {
+    fun getCatFavList(onFail: () -> Unit) {
         corScope.launch {
             NetworkService.getInstance()
                 .getJSONApi()
-                .postSaveImageAsFavourites(image_id = image_id, null)
+                .getCatFavList()
+                .enqueue(object : Callback<List<CatFav>> {
+                    override fun onResponse(call: Call<List<CatFav>>, response: Response<List<CatFav>>) {
+                        Log.d("Network", "CatFav downloaded list size: ${response.body()?.size ?: "None"}")
+                        _favList.postValue(response.body())
+                    }
+
+                    override fun onFailure(call: Call<List<CatFav>>, t: Throwable) {
+                        Log.e("Network", "CatFav download fail")
+                        onFail()
+                    }
+                })
+        }
+    }
+
+    fun postSaveImageAsFavourites(image: CatFav, onFail: () -> Unit) {
+        corScope.launch {
+            NetworkService.getInstance()
+                .getJSONApi()
+                .postSaveImageAsFavourites(image)
                 .enqueue(object :Callback<CatResponses> {
                     override fun onResponse(
                         call: Call<CatResponses>,
                         response: Response<CatResponses>
                     ) {
-                        Log.d("Network", "Cat added on favourites")
+                        Log.d("Network", "Cat added on favourites. BODY: ${response.errorBody()?.string()}")
                     }
 
                     override fun onFailure(call: Call<CatResponses>, t: Throwable) {
@@ -131,7 +151,7 @@ class SharedCatApiViewModel : ViewModel() {
                         call: Call<CatResponses>,
                         response: Response<CatResponses>
                     ) {
-                        Log.d("Network", "Voted")
+                        Log.d("Network", "Voted. BODY: ${response.body()}")
                     }
 
                     override fun onFailure(call: Call<CatResponses>, t: Throwable) {

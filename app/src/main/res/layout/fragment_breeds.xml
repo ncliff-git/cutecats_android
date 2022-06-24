@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.breeds.BreedsFragment">
+    tools:context=".ui.view.breeds.BreedsFragment">
 
     <ProgressBar
         android:id="@+id/progress_bar_cat_breeds_list"

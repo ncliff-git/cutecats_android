@@ -12,7 +12,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.github.ncliff.cutecats.R
-import com.github.ncliff.cutecats.model.CatBreeds
+import com.github.ncliff.cutecats.data.model.CatBreeds
 
 class CatBreedsRVAdapter(private val onClick: (name: String) -> Unit) :
     RecyclerView.Adapter<CatBreedsRVAdapter.CatBreedsHolder>() {
@@ -45,7 +45,7 @@ class CatBreedsRVAdapter(private val onClick: (name: String) -> Unit) :
         notifyDataSetChanged()
     }
 
-    private fun getItemByPosition(position: Int) = _catBreedsList[position]
+    fun getItemByPosition(position: Int) = _catBreedsList[position]
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatBreedsHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_cat, parent, false)

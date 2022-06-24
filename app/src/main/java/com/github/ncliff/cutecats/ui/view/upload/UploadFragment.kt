@@ -1,9 +1,8 @@
-package com.github.ncliff.cutecats.ui.upload
+package com.github.ncliff.cutecats.ui.view.upload
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore

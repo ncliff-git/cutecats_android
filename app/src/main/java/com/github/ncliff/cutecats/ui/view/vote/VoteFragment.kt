@@ -1,4 +1,4 @@
-package com.github.ncliff.cutecats.ui.vote
+package com.github.ncliff.cutecats.ui.view.vote
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,13 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
 import coil.load
+import com.github.ncliff.cutecats.data.model.CatFav
 import com.github.ncliff.cutecats.databinding.FragmentVoteBinding
-import com.github.ncliff.cutecats.model.CatImage
-import com.github.ncliff.cutecats.model.CatVote
+import com.github.ncliff.cutecats.data.model.CatImage
+import com.github.ncliff.cutecats.data.model.CatVote
 import com.github.ncliff.cutecats.ui.viewmodel.SharedCatApiViewModel
 
 class VoteFragment : Fragment() {
@@ -61,8 +59,8 @@ class VoteFragment : Fragment() {
         }
 
         _binding.btnFavIt.setOnClickListener {
-            catImage?.id?.also {
-                catViewModel.postSaveImageAsFavourites(it) {}
+            catImage?.also {
+                catViewModel.postSaveImageAsFavourites(CatFav(imageId = it.id)) {}
             }
         }
     }

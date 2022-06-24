@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="30dp"
-    tools:context=".ui.vote.VoteFragment">
+    tools:context=".ui.view.vote.VoteFragment">
 
     <ProgressBar
         android:layout_width="wrap_content"

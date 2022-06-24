@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/breedsFragment"
-        android:name="com.github.ncliff.cutecats.ui.breeds.BreedsFragment"
+        android:name="com.github.ncliff.cutecats.ui.view.breeds.BreedsFragment"
         android:label="@string/breeds"
         tools:layout="@layout/fragment_breeds" >
         <action
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/detailedItemFragment"
-        android:name="com.github.ncliff.cutecats.ui.breeds.DetailedItemFragment"
+        android:name="com.github.ncliff.cutecats.ui.view.breeds.DetailedItemFragment"
         android:label="@string/breed_info"
         tools:layout="@layout/fragment_detailed_item" />
 </navigation>
