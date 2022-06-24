@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/breeds_navigation"
+        android:icon="@drawable/ic_paw_24"
+        android:title="@string/breeds" />
+
+    <item
+        android:id="@+id/navigation_vote"
+        android:icon="@drawable/ic_baseline_favorite_24"
+        android:title="@string/vote"/>
+
+    <item
+        android:id="@+id/navigation_favourites"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/favourites" />
+
+    <item
+        android:id="@+id/navigation_upload"
+        android:icon="@drawable/ic_baseline_cloud_upload_24"
+        android:title="@string/upload" />
+
+
+</menu>

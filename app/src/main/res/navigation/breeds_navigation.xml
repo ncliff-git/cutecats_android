@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/breeds_navigation"
+    app:startDestination="@id/breedsFragment">
+
+    <fragment
+        android:id="@+id/breedsFragment"
+        android:name="com.github.ncliff.cutecats.ui.view.breeds.BreedsFragment"
+        android:label="@string/breeds"
+        tools:layout="@layout/fragment_breeds" >
+        <action
+            android:id="@+id/action_homeFragment_to_detailedItemFragment"
+            app:destination="@id/detailedItemFragment"
+            app:popUpTo="@id/breedsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailedItemFragment"
+        android:name="com.github.ncliff.cutecats.ui.view.breeds.DetailedItemFragment"
+        android:label="@string/breed_info"
+        tools:layout="@layout/fragment_detailed_item" />
+</navigation>
