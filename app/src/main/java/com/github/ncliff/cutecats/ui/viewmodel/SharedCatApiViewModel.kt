@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.ncliff.cutecats.data.network.*
 import com.github.ncliff.cutecats.data.model.*
+import com.github.ncliff.cutecats.data.network.NetworkService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -106,8 +106,14 @@ class SharedCatApiViewModel : ViewModel() {
                 .getJSONApi()
                 .getCatFavList()
                 .enqueue(object : Callback<List<CatFav>> {
-                    override fun onResponse(call: Call<List<CatFav>>, response: Response<List<CatFav>>) {
-                        Log.d("Network", "CatFav downloaded list size: ${response.body()?.size ?: "None"}")
+                    override fun onResponse(
+                        call: Call<List<CatFav>>,
+                        response: Response<List<CatFav>>
+                    ) {
+                        Log.d(
+                            "Network",
+                            "CatFav downloaded list size: ${response.body()?.size ?: "None"}"
+                        )
                         _favList.postValue(response.body())
                     }
 
@@ -124,12 +130,15 @@ class SharedCatApiViewModel : ViewModel() {
             NetworkService.getInstance()
                 .getJSONApi()
                 .postSaveImageAsFavourites(image)
-                .enqueue(object :Callback<CatResponses> {
+                .enqueue(object : Callback<CatResponses> {
                     override fun onResponse(
                         call: Call<CatResponses>,
                         response: Response<CatResponses>
                     ) {
-                        Log.d("Network", "Cat added on favourites. BODY: ${response.errorBody()?.string()}")
+                        Log.d(
+                            "Network",
+                            "Cat added on favourites. BODY: ${response.errorBody()?.string()}"
+                        )
                     }
 
                     override fun onFailure(call: Call<CatResponses>, t: Throwable) {
@@ -176,7 +185,9 @@ class SharedCatApiViewModel : ViewModel() {
                             if (response.errorBody() != null) {
                                 Log.e(
                                     "Network",
-                                    "Image upload error error body: ${response.errorBody()?.string()}"
+                                    "Image upload error error body: ${
+                                        response.errorBody()?.string()
+                                    }"
                                 )
                             } else {
                                 Log.d(

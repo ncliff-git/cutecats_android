@@ -14,10 +14,18 @@ class CatFavRVAdapter: RecyclerView.Adapter<CatFavRVAdapter.CatFavHolder>() {
     private var _catFavList = ArrayList<CatFav>()
 
     class CatFavHolder(view: View): RecyclerView.ViewHolder(view) {
+        init {
+            view.visibility = View.GONE
+        }
+
         private val ivCatFav: ImageView = view.findViewById(R.id.iv_fav_cat)
 
         fun bind(catFav: CatFav) {
-            ivCatFav.load(catFav.image?.url)
+            ivCatFav.load(catFav.image?.url) {
+                listener(onSuccess = {_, _ ->
+                    itemView.visibility = View.VISIBLE
+                })
+            }
         }
     }
 
