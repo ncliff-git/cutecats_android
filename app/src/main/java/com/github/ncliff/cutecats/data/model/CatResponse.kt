@@ -2,7 +2,7 @@ package com.github.ncliff.cutecats.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class UploadResponse(
+data class CatResponse(
 
 	@field:SerializedName("approved")
 	val approved: Int? = null,

@@ -19,14 +19,14 @@ interface CatApiService {
     fun getRandomCatImage(@Query("limit")limit: Int): Call<List<CatImage>>
 
     @POST("favourites")
-    fun postSaveImageAsFavourites(@Body image: CatFav): Call<CatResponses>
+    fun postSaveImageAsFavourites(@Body image: CatFav): Call<CatResponse>
 
     @POST("votes")
-    fun postCatVote(@Body imageVote: CatVote): Call<CatResponses>
+    fun postCatVote(@Body imageVote: CatVote): Call<CatResponse>
 
     @Multipart
     @POST("images/upload")
-    fun postCatUpload(@Part("file") file: RequestBody): Call<UploadResponse>
+    fun postCatUpload(@Part("file") file: RequestBody): Call<CatResponse>
 
     @GET("favourites")
     fun getCatFavList(): Call<List<CatFav>>
